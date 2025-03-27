@@ -1,0 +1,17 @@
+{
+  "name": "mastodon-profile-checker",
+  "version": "1.0.0",
+  "description": "Trys to load a Mastodon Account and scores it accordingly to set fields",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "mastodon"
+  ],
+  "author": "54 Grad Software GmbH - Samuel Brinkmann",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.8.4"
+  }
+}
