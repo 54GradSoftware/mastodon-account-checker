@@ -3,21 +3,22 @@ import axios from 'axios';
 const scoreMatrix = {
     display_name: 10,
     note: 10,
-
     verified_fields: 20,
     discoverable: 20,
     indexable: 20,
     featuredCollection: 20
 }
 
-const calculateMastodonAccountScore = async (mastodonHandle) => {
+const calculateMastodonAccountScore = async (mastodonHandle, accountLookup = null) => {
     try{
-        const account = await getAccountLookup(mastodonHandle)
-        if(!account){
+        if(!accountLookup){
+            accountLookup = await getAccountLookup(mastodonHandle)
+        }
+        if(!accountLookup){
             console.error('could not load account')
             return
         }
-        const {username, display_name, note, discoverable, indexable, fields, avatar_static, header_static} = account
+        const {username, display_name, note, discoverable, indexable, fields, avatar_static, header_static} = accountLookup
         const featuredCollection = await getFeaturedCollection(username, mastodonHandle)
         let score = 0;
         if(display_name != '') score += scoreMatrix.display_name
