@@ -1,0 +1,12 @@
+{
+    "name": "mastodon-account-checker",
+    "version": "1.0.0",
+    "type": "module",
+    "main": "server/index.js",
+    "exports": {
+        ".": "./server/index.js"
+    },
+    "dependencies": {
+        "axios": "^1.8.4"
+    }
+}
