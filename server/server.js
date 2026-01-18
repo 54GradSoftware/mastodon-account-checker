@@ -9,7 +9,7 @@ app.use(express.json());
 
 const limiter = rateLimit({
     windowMs: 15 * 60 * 1000, // 15 Minuten
-    max: 15, // Max 15 Requests pro IP in 15 Minuten
+    max: 100, // Max 100 Requests pro IP in 15 Minuten
     standardHeaders: true,
     legacyHeaders: false,
     message: {
@@ -18,9 +18,7 @@ const limiter = rateLimit({
     }
 });
 
-app.use(limiter);
-
-app.get('/api/score/:handle', async (req, res) => {
+app.get('/api/score/:handle', limiter, async (req, res) => {
     const { handle } = req.params;
 
     if (!handle) {
