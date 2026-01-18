@@ -1,10 +1,17 @@
 import express from 'express';
+import cors from 'cors';
 import rateLimit from 'express-rate-limit';
 import { calculateMastodonAccountScore } from './index.js';
 
 const app = express();
 const PORT = process.env.PORT || 3100;
+const CORS_ALLOW_ALL = process.env.CORS_ALLOW_ALL === 'true';
 
+const corsOptions = CORS_ALLOW_ALL
+    ? {}
+    : { origin: process.env.CORS_ORIGIN || false };
+
+app.use(cors(corsOptions));
 app.use(express.json());
 
 const limiter = rateLimit({
