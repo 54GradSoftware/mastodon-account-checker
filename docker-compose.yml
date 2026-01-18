@@ -1,11 +1,11 @@
 version: '3'
 services:
-  backend:  
-    build: ./backend
+  backend:
+    build: ./server
     command: npm run start-server
     ports:
-      - "3002:3002"
+      - "3001:3001"
   frontend:
     build: ./frontend
     ports:
-      - "3001:3001"
+      - "3000:3001"
