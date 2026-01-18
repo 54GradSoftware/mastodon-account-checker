@@ -15,6 +15,8 @@ const loading = ref(false)
 const result = ref(null)
 const error = ref(null)
 
+const apiBaseUrl = import.meta.env.VITE_API_URL || ''
+
 const checkScore = async () => {
     error.value = null
 
@@ -32,7 +34,7 @@ const checkScore = async () => {
     result.value = null
 
     try {
-        const response = await axios.get(`/api/score/${encodeURIComponent(mastodonHandle.value)}`)
+        const response = await axios.get(`${apiBaseUrl}/api/score/${encodeURIComponent(mastodonHandle.value)}`)
         result.value = response.data
     } catch (err) {
         if (err.response) {
