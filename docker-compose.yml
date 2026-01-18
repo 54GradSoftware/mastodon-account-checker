@@ -4,7 +4,7 @@ services:
     build: ./server
     command: npm run start-server
     ports:
-      - "3001:3001"
+      - "3100:3100"
   frontend:
     build: ./frontend
     ports:

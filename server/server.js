@@ -3,7 +3,7 @@ import rateLimit from 'express-rate-limit';
 import { calculateMastodonAccountScore } from './index.js';
 
 const app = express();
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3100;
 
 app.use(express.json());
 
