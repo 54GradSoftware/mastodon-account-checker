@@ -3,8 +3,6 @@ FROM node:alpine as builder
 WORKDIR /app
 ADD . .
 
-RUN mv .env.production .env
-
 RUN npm ci && npm run build
 
 # build nginx webserver
