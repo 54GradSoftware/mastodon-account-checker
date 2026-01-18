@@ -1,12 +1,6 @@
-FROM node:alpine
+FROM node:alpine as builder
 
 WORKDIR /app
+ADD . .
 
-COPY package*.json ./
-RUN npm ci --only=production
-
-COPY . .
-
-EXPOSE 3001
-
-CMD ["npm", "run", "start-server"]
+RUN npm ci
