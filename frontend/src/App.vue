@@ -8,7 +8,7 @@ import Message from 'primevue/message'
 import ProgressSpinner from 'primevue/progressspinner'
 import AppHeader from './components/AppHeader.vue'
 import AppFooter from './components/AppFooter.vue'
-import ProfileResult from './components/ProfileResult.vue'
+import AccountResult from './components/AccountResult.vue'
 
 const mastodonHandle = ref('')
 const loading = ref(false)
@@ -58,12 +58,12 @@ const checkScore = async () => {
                 <Card style="margin-bottom: 2rem;">
                     <template #title>
                         <i class="pi pi-info-circle" style="margin-right: 0.5rem;" aria-hidden="true"></i>
-                        <span>Was ist der Mastodon Profil Checker?</span>
+                        <span>Was ist der Mastodon Account Checker?</span>
                     </template>
                     <template #content>
                         <p style="line-height: 1.6; margin-bottom: 1rem;">
-                            Der <strong>Mastodon Profil Checker</strong> analysiert dein Mastodon-Profil und bewertet,
-                            wie gut es für die Auffindbarkeit und Vernetzung im Fediverse optimiert ist.
+                            Der <strong>Mastodon Account Checker</strong> analysiert deinen Mastodon-Account und bewertet,
+                            wie gut er für die Auffindbarkeit und Vernetzung im Fediverse optimiert ist.
                         </p>
                         <p style="line-height: 1.6; margin-bottom: 1rem;">
                             Ein gut ausgefülltes Profil hilft anderen Nutzern, dich zu finden und zu verstehen,
@@ -79,11 +79,11 @@ const checkScore = async () => {
             </section>
 
             <!-- Eingabe -->
-            <section aria-label="Profil überprüfen">
+            <section aria-label="Account überprüfen">
                 <Card style="margin-bottom: 2rem;">
                     <template #title>
                         <i class="pi pi-user" style="margin-right: 0.5rem;" aria-hidden="true"></i>
-                        <span>Profil überprüfen</span>
+                        <span>Account überprüfen</span>
                     </template>
                     <template #content>
                         <div style="display: flex; flex-direction: column; gap: 0.5rem;">
@@ -100,7 +100,7 @@ const checkScore = async () => {
                                     @keyup.enter="checkScore" :disabled="loading" aria-describedby="handle-description"
                                     :aria-invalid="error ? 'true' : 'false'" autofocus />
                                 <Button label="Überprüfen" icon="pi pi-search" @click="checkScore" :loading="loading"
-                                    aria-label="Mastodon Profil überprüfen" />
+                                    aria-label="Mastodon Account überprüfen" />
                             </div>
                         </div>
                         <div v-if="error && !loading" role="alert" aria-live="assertive">
@@ -115,12 +115,12 @@ const checkScore = async () => {
             <!-- Loading -->
             <div v-if="loading" style="display: flex; justify-content: center; padding: 3rem;" role="status"
                 aria-live="polite">
-                <ProgressSpinner aria-label="Profil wird geladen" />
-                <span class="sr-only">Profil wird analysiert, bitte warten...</span>
+                <ProgressSpinner aria-label="Account wird geladen" />
+                <span class="sr-only">Account wird analysiert, bitte warten...</span>
             </div>
 
             <!-- Ergebnis -->
-            <ProfileResult v-if="result && !loading" :result="result" />
+            <AccountResult v-if="result && !loading" :result="result" />
 
         </main>
 

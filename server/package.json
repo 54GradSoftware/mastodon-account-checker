@@ -1,5 +1,5 @@
 {
-  "name": "mastodon-profile-checker",
+  "name": "mastodon-account-checker",
   "version": "1.0.0",
   "description": "Trys to load a Mastodon Account and scores it accordingly to set fields",
   "main": "index.js",

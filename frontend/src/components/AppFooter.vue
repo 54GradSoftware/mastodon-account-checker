@@ -8,8 +8,8 @@
         </span>
       </div>
       <div class="footer-col">
-        <a href="https://github.com/54GradSoftware/mastodon-profile-checker">GitHub (Software)</a> | <a
-          href="https://github.com/54GradSoftware/mastodon-profile-checker/blob/main/LICENSE">MIT-Lizenz</a>
+        <a href="https://github.com/54GradSoftware/mastodon-account-checker">GitHub (Software)</a> | <a
+          href="https://github.com/54GradSoftware/mastodon-account-checker/blob/main/LICENSE">MIT-Lizenz</a>
       </div>
       <div class="footer-col">
         <a href="https://www.54gradsoftware.de/impressum">Impressum</a> | <a

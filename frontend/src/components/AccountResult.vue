@@ -238,7 +238,7 @@ const mastodonServerUrl = computed(() => {
             </div>
 
             <Message v-if="result.score >= 80" severity="success" :closable="false" style="margin-top: 1.5rem;">
-                Dein Profil ist hervorragend optimiert! Weiter so!
+                Dein Account ist hervorragend optimiert! Weiter so!
             </Message>
         </Fieldset>
     </section>

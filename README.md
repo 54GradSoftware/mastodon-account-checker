@@ -1,11 +1,11 @@
-# Mastodon Profile Checker
+# Mastodon Account Checker
 
-Ein Tool zur Überprüfung und Bewertung von Mastodon-Profilen basierend auf ausgefüllten Feldern.
+Ein Tool zur Überprüfung und Bewertung von Mastodon-Accounts basierend auf ausgefüllten Feldern.
 
 ## Funktionen
 
-- Lädt Mastodon-Profile anhand von Benutzername und Server
-- Bewertet Profile nach Vollständigkeit (Avatar, Header, Bio, etc.)
+- Lädt Mastodon-Accounts anhand von Benutzername und Server
+- Bewertet Accounts nach Vollständigkeit (Avatar, Header, Bio, etc.)
 - Zeigt einen Score für die Profilqualität an
 
 ## Scoring-Tabelle
