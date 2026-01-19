@@ -29,7 +29,6 @@ const calculateMastodonAccountScore = async (mastodonHandle, accountLookup = nul
         if (!!featuredCollection && featuredCollection.length) score += scoreMatrix.featuredCollection
 
         const verifiedFields = fields.filter(field => field.verified_at != null)
-
         if (verifiedFields.length) score += scoreMatrix.verified_fields
 
         return {
