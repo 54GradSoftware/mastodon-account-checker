@@ -4,7 +4,6 @@ import Card from 'primevue/card'
 import ProgressBar from 'primevue/progressbar'
 import Message from 'primevue/message'
 import Tag from 'primevue/tag'
-import Panel from 'primevue/panel'
 import Avatar from 'primevue/avatar'
 import Fieldset from 'primevue/fieldset'
 import Dialog from 'primevue/dialog'
@@ -111,8 +110,8 @@ const mastodonServerUrl = computed(() => {
         <Fieldset legend="Detaillierte Bewertung" style="margin-bottom: 2rem;">
             <div style="display: flex; flex-direction: column; gap: 1rem;">
                 <!-- Display Name -->
-                <Panel>
-                    <template #header>
+                <Card>
+                    <template #title>
                         <div style="display: flex; align-items: center; gap: 0.5rem;">
                             <i :class="result.values.display_name ? 'pi pi-check-circle' : 'pi pi-times-circle'"
                                 :style="{ color: result.values.display_name ? 'var(--p-green-500)' : 'var(--p-red-500)' }"></i>
@@ -121,26 +120,28 @@ const mastodonServerUrl = computed(() => {
                                 :severity="result.values.display_name ? 'success' : 'danger'" />
                         </div>
                     </template>
-                    <p style="margin: 0; color: var(--p-text-muted-color);">
-                        Ein Anzeigename hilft anderen, dich auf den ersten Blick zu erkennen.
-                        Er kann von deinem Benutzernamen abweichen und Emojis oder deinen echten Namen
-                        enthalten.
-                    </p>
-                    <p v-if="result.values.display_name" style="margin-top: 0.5rem; margin-bottom: 0;">
-                        <strong>Dein Anzeigename:</strong> {{ result.values.display_name }}
-                    </p>
-                    <Message v-else severity="warn" :closable="false" style="margin-top: 0.75rem;">
-                        <strong>Tipp:</strong> Gehe zu
-                        <a :href="`${mastodonServerUrl}/settings/profile`" target="_blank" rel="noopener noreferrer"
-                            style="color: var(--p-primary-color);">Einstellungen &gt;
-                            Profil</a>
-                        und füge einen Anzeigenamen hinzu.
-                    </Message>
-                </Panel>
+                    <template #content>
+                        <p style="margin: 0; color: var(--p-text-muted-color);">
+                            Ein Anzeigename hilft anderen, dich auf den ersten Blick zu erkennen.
+                            Er kann von deinem Benutzernamen abweichen und Emojis oder deinen echten Namen
+                            enthalten.
+                        </p>
+                        <p v-if="result.values.display_name" style="margin-top: 0.5rem; margin-bottom: 0;">
+                            <strong>Dein Anzeigename:</strong> {{ result.values.display_name }}
+                        </p>
+                        <Message v-else severity="warn" :closable="false" style="margin-top: 0.75rem;">
+                            <strong>Tipp:</strong> Gehe zu
+                            <a :href="`${mastodonServerUrl}/settings/profile`" target="_blank" rel="noopener noreferrer"
+                                style="color: var(--p-primary-color);">Einstellungen &gt;
+                                Profil</a>
+                            und füge einen Anzeigenamen hinzu.
+                        </Message>
+                    </template>
+                </Card>
 
                 <!-- Bio/Note -->
-                <Panel>
-                    <template #header>
+                <Card>
+                    <template #title>
                         <div style="display: flex; align-items: center; gap: 0.5rem;">
                             <i :class="result.values.note ? 'pi pi-check-circle' : 'pi pi-times-circle'"
                                 :style="{ color: result.values.note ? 'var(--p-green-500)' : 'var(--p-red-500)' }"></i>
@@ -149,20 +150,22 @@ const mastodonServerUrl = computed(() => {
                                 :severity="result.values.note ? 'success' : 'danger'" />
                         </div>
                     </template>
-                    <p style="margin: 0; color: var(--p-text-muted-color);">
-                        Die Profilbeschreibung gibt anderen einen Einblick in deine Interessen,
-                        deinen Beruf oder deine Persönlichkeit. Sie ist oft das Erste, was Leute lesen.
-                    </p>
-                    <Message v-if="!result.values.note" severity="warn" :closable="false" style="margin-top: 0.75rem;">
-                        <strong>Tipp:</strong> Erzähle anderen etwas über dich in deiner
-                        <a :href="`${mastodonServerUrl}/settings/profile`" target="_blank" rel="noopener noreferrer"
-                            style="color: var(--p-primary-color);">Profilbeschreibung</a>.
-                    </Message>
-                </Panel>
+                    <template #content>
+                        <p style="margin: 0; color: var(--p-text-muted-color);">
+                            Die Profilbeschreibung gibt anderen einen Einblick in deine Interessen,
+                            deinen Beruf oder deine Persönlichkeit. Sie ist oft das Erste, was Leute lesen.
+                        </p>
+                        <Message v-if="!result.values.note" severity="warn" :closable="false" style="margin-top: 0.75rem;">
+                            <strong>Tipp:</strong> Erzähle anderen etwas über dich in deiner
+                            <a :href="`${mastodonServerUrl}/settings/profile`" target="_blank" rel="noopener noreferrer"
+                                style="color: var(--p-primary-color);">Profilbeschreibung</a>.
+                        </Message>
+                    </template>
+                </Card>
 
                 <!-- Discoverable -->
-                <Panel>
-                    <template #header>
+                <Card>
+                    <template #title>
                         <div style="display: flex; align-items: center; gap: 0.5rem;">
                             <i :class="result.values.discoverable ? 'pi pi-check-circle' : 'pi pi-times-circle'"
                                 :style="{ color: result.values.discoverable ? 'var(--p-green-500)' : 'var(--p-red-500)' }"></i>
@@ -172,23 +175,25 @@ const mastodonServerUrl = computed(() => {
                                 :severity="result.values.discoverable ? 'success' : 'danger'" />
                         </div>
                     </template>
-                    <p style="margin: 0; color: var(--p-text-muted-color);">
-                        Wenn diese Option aktiviert ist, erscheint dein Profil im Profilverzeichnis deiner
-                        Instanz.
-                        Dies macht es für andere einfacher, neue interessante Accounts zu entdecken.
-                    </p>
-                    <Message v-if="!result.values.discoverable" severity="warn" :closable="false"
-                        style="margin-top: 0.75rem;">
-                        <strong>Tipp:</strong> Aktiviere "Im Profilverzeichnis erscheinen" in den
-                        <a :href="`${mastodonServerUrl}/settings/privacy`" target="_blank" rel="noopener noreferrer"
-                            style="color: var(--p-primary-color);">Einstellungen &gt;
-                            Datenschutz und Reichweite</a>.
-                    </Message>
-                </Panel>
+                    <template #content>
+                        <p style="margin: 0; color: var(--p-text-muted-color);">
+                            Wenn diese Option aktiviert ist, erscheint dein Profil im Profilverzeichnis deiner
+                            Instanz.
+                            Dies macht es für andere einfacher, neue interessante Accounts zu entdecken.
+                        </p>
+                        <Message v-if="!result.values.discoverable" severity="warn" :closable="false"
+                            style="margin-top: 0.75rem;">
+                            <strong>Tipp:</strong> Aktiviere "Im Profilverzeichnis erscheinen" in den
+                            <a :href="`${mastodonServerUrl}/settings/privacy`" target="_blank" rel="noopener noreferrer"
+                                style="color: var(--p-primary-color);">Einstellungen &gt;
+                                Datenschutz und Reichweite</a>.
+                        </Message>
+                    </template>
+                </Card>
 
                 <!-- Indexable -->
-                <Panel>
-                    <template #header>
+                <Card>
+                    <template #title>
                         <div style="display: flex; align-items: center; gap: 0.5rem;">
                             <i :class="result.values.indexable === true ? 'pi pi-check-circle' : 'pi pi-times-circle'"
                                 :style="{ color: result.values.indexable === true ? 'var(--p-green-500)' : 'var(--p-red-500)' }"></i>
@@ -197,22 +202,24 @@ const mastodonServerUrl = computed(() => {
                                 :severity="result.values.indexable === true ? 'success' : 'danger'" />
                         </div>
                     </template>
-                    <p style="margin: 0; color: var(--p-text-muted-color);">
-                        Erlaubt es, dass deine öffentlichen Beiträge in der Suche gefunden werden können.
-                        Dies erhöht deine Sichtbarkeit im Fediverse erheblich.
-                    </p>
-                    <Message v-if="!result.values.indexable" severity="warn" :closable="false"
-                        style="margin-top: 0.75rem;">
-                        <strong>Tipp:</strong> Erlaube die Indexierung deiner Beiträge in den
-                        <a :href="`${mastodonServerUrl}/settings/privacy`" target="_blank" rel="noopener noreferrer"
-                            style="color: var(--p-primary-color);">Einstellungen &gt;
-                            Datenschutz und Reichweite</a>.
-                    </Message>
-                </Panel>
+                    <template #content>
+                        <p style="margin: 0; color: var(--p-text-muted-color);">
+                            Erlaubt es, dass deine öffentlichen Beiträge in der Suche gefunden werden können.
+                            Dies erhöht deine Sichtbarkeit im Fediverse erheblich.
+                        </p>
+                        <Message v-if="!result.values.indexable" severity="warn" :closable="false"
+                            style="margin-top: 0.75rem;">
+                            <strong>Tipp:</strong> Erlaube die Indexierung deiner Beiträge in den
+                            <a :href="`${mastodonServerUrl}/settings/privacy`" target="_blank" rel="noopener noreferrer"
+                                style="color: var(--p-primary-color);">Einstellungen &gt;
+                                Datenschutz und Reichweite</a>.
+                        </Message>
+                    </template>
+                </Card>
 
                 <!-- Verified Fields -->
-                <Panel>
-                    <template #header>
+                <Card>
+                    <template #title>
                         <div style="display: flex; align-items: center; gap: 0.5rem;">
                             <i :class="result.values.verifiedFields?.length > 0 ? 'pi pi-check-circle' : 'pi pi-times-circle'"
                                 :style="{ color: result.values.verifiedFields?.length > 0 ? 'var(--p-green-500)' : 'var(--p-red-500)' }"></i>
@@ -221,32 +228,34 @@ const mastodonServerUrl = computed(() => {
                                 :severity="result.values.verifiedFields?.length > 0 ? 'success' : 'danger'" />
                         </div>
                     </template>
-                    <p style="margin: 0; color: var(--p-text-muted-color);">
-                        Verifizierte Links beweisen, dass du der Besitzer einer Website bist.
-                        Du kannst dies tun, indem du einen speziellen Link auf deiner Website einbaust,
-                        der zurück auf dein Mastodon-Profil verweist.
-                    </p>
-                    <div v-if="result.values.verifiedFields?.length > 0" style="margin-top: 0.5rem;">
-                        <strong>Verifizierte Links:</strong>
-                        <ul style="margin: 0.5rem 0 0 0; padding-left: 1.5rem;">
-                            <li v-for="field in result.values.verifiedFields" :key="field.name">
-                                {{ field.name }}: <span v-html="field.value"></span>
-                            </li>
-                        </ul>
-                    </div>
-                    <Message v-else severity="warn" :closable="false" style="margin-top: 0.75rem;">
-                        <strong>Tipp:</strong> Gehe zu
-                        <a :href="`${mastodonServerUrl}/settings/verification`" target="_blank"
-                            rel="noopener noreferrer" style="color: var(--p-primary-color);">Einstellungen &gt;
-                            Öffentliches Profil &gt;
-                            Verifizierung</a>
-                        und füge einen rel="me" Link auf deiner Website hinzu.
-                    </Message>
-                </Panel>
+                    <template #content>
+                        <p style="margin: 0; color: var(--p-text-muted-color);">
+                            Verifizierte Links beweisen, dass du der Besitzer einer Website bist.
+                            Du kannst dies tun, indem du einen speziellen Link auf deiner Website einbaust,
+                            der zurück auf dein Mastodon-Profil verweist.
+                        </p>
+                        <div v-if="result.values.verifiedFields?.length > 0" style="margin-top: 0.5rem;">
+                            <strong>Verifizierte Links:</strong>
+                            <ul style="margin: 0.5rem 0 0 0; padding-left: 1.5rem;">
+                                <li v-for="field in result.values.verifiedFields" :key="field.name">
+                                    {{ field.name }}: <span v-html="field.value"></span>
+                                </li>
+                            </ul>
+                        </div>
+                        <Message v-else severity="warn" :closable="false" style="margin-top: 0.75rem;">
+                            <strong>Tipp:</strong> Gehe zu
+                            <a :href="`${mastodonServerUrl}/settings/verification`" target="_blank"
+                                rel="noopener noreferrer" style="color: var(--p-primary-color);">Einstellungen &gt;
+                                Öffentliches Profil &gt;
+                                Verifizierung</a>
+                            und füge einen rel="me" Link auf deiner Website hinzu.
+                        </Message>
+                    </template>
+                </Card>
 
                 <!-- Featured Collection -->
-                <Panel>
-                    <template #header>
+                <Card>
+                    <template #title>
                         <div style="display: flex; align-items: center; gap: 0.5rem;">
                             <i :class="result.values.featuredCollection?.length > 0 ? 'pi pi-check-circle' : 'pi pi-times-circle'"
                                 :style="{ color: result.values.featuredCollection?.length > 0 ? 'var(--p-green-500)' : 'var(--p-red-500)' }"></i>
@@ -255,26 +264,28 @@ const mastodonServerUrl = computed(() => {
                                 :severity="result.values.featuredCollection?.length > 0 ? 'success' : 'danger'" />
                         </div>
                     </template>
-                    <p style="margin: 0; color: var(--p-text-muted-color);">
-                        Angeheftete Beiträge erscheinen oben auf deinem Profil und sind das Erste,
-                        was Besucher sehen. Nutze sie, um wichtige Informationen über dich oder
-                        deine besten Beiträge hervorzuheben.
-                    </p>
-                    <div v-if="result.values.featuredCollection?.length > 0" style="margin-top: 0.5rem;">
-                        <strong>Angeheftete Beiträge:</strong>
-                        <ul style="margin: 0.5rem 0 0 0; padding-left: 1.5rem;">
-                            <li v-for="(url, index) in result.values.featuredCollection" :key="index">
-                                <a :href="url" target="_blank" rel="noopener" >
-                                    {{ url }}
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                    <Message v-else severity="warn" :closable="false" style="margin-top: 0.75rem;">
-                        <strong>Tipp:</strong> Hefte interessante Beiträge an, damit Profilbesucher sie sofort
-                        sehen.
-                    </Message>
-                </Panel>
+                    <template #content>
+                        <p style="margin: 0; color: var(--p-text-muted-color);">
+                            Angeheftete Beiträge erscheinen oben auf deinem Profil und sind das Erste,
+                            was Besucher sehen. Nutze sie, um wichtige Informationen über dich oder
+                            deine besten Beiträge hervorzuheben.
+                        </p>
+                        <div v-if="result.values.featuredCollection?.length > 0" style="margin-top: 0.5rem;">
+                            <strong>Angeheftete Beiträge:</strong>
+                            <ul style="margin: 0.5rem 0 0 0; padding-left: 1.5rem;">
+                                <li v-for="(url, index) in result.values.featuredCollection" :key="index">
+                                    <a :href="url" target="_blank" rel="noopener">
+                                        {{ url }}
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <Message v-else severity="warn" :closable="false" style="margin-top: 0.75rem;">
+                            <strong>Tipp:</strong> Hefte interessante Beiträge an, damit Profilbesucher sie sofort
+                            sehen.
+                        </Message>
+                    </template>
+                </Card>
             </div>
 
             <Message v-if="result.score >= 80" severity="success" :closable="false" style="margin-top: 1.5rem;">

@@ -63,8 +63,7 @@ if(initialHandle) {
             <section aria-label="Einführung">
                 <Card style="margin-bottom: 2rem;">
                     <template #title>
-                        <i class="pi pi-info-circle" style="margin-right: 0.5rem;" aria-hidden="true"></i>
-                        <span>Was ist der Mastodon Account Checker?</span>
+                        <h1>Mastodon Account Checker</h1>
                     </template>
                     <template #content>
                         <p style="line-height: 1.6; margin-bottom: 1rem;">
@@ -88,8 +87,7 @@ if(initialHandle) {
             <section aria-label="Account überprüfen">
                 <Card style="margin-bottom: 2rem;">
                     <template #title>
-                        <i class="pi pi-user" style="margin-right: 0.5rem;" aria-hidden="true"></i>
-                        <span>Account überprüfen</span>
+                        <h2>Account überprüfen</h2>
                     </template>
                     <template #content>
                         <div style="display: flex; flex-direction: column; gap: 0.5rem;">
