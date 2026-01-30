@@ -68,7 +68,7 @@ const checkScore = async () => {
                             wie gut er für die Auffindbarkeit und Vernetzung im Fediverse optimiert ist.
                         </p>
                         <p style="line-height: 1.6; margin-bottom: 1rem;">
-                            Ein gut ausgefülltes Profil hilft anderen Nutzern, dich zu finden und zu verstehen,
+                            Ein gut ausgefülltes Mastodon-Account hilft anderen Nutzern, dich zu finden und zu verstehen,
                             wer du bist und wofür du dich interessierst. Dies fördert bessere Verbindungen und
                             eine aktivere Teilnahme am dezentralen sozialen Netzwerk.
                         </p>

@@ -1,6 +1,6 @@
 # Mastodon Account Checker
 
-Ein Tool zur Überprüfung und Bewertung von Mastodon-Accounts basierend auf ausgefüllten Feldern.
+Dieses Webtool überprüft Mastodon-Accounts basierend auf den Einstellungen des eingegebenen Accounts. Es gibt einen Gesamt-Score von 0 bis 100 sowie eine Scoring-Tabelle, die eine Übersicht der einzelnen Bewertungspunkte bietet.
 
 ## Funktionen
 
@@ -12,11 +12,11 @@ Ein Tool zur Überprüfung und Bewertung von Mastodon-Accounts basierend auf aus
 
 | Kriterium | Punkte | Beschreibung |
 |-----------|--------|--------------|
-| Display Name | 10 | Anzeigename ist gesetzt |
-| Bio (Note) | 20 | Profilbeschreibung ist ausgefüllt |
-| Verifizierte Felder | 20 | Mindestens ein verifizierter Link |
-| Discoverable | 20 | Profil ist für Suche freigegeben |
-| Indexable | 20 | Profil ist für Indexierung freigegeben |
+| Anzeigename| 10 | Anzeigename ist gesetzt |
+| Profilbeschreibung (Bio) | 20 | Profilbeschreibung ist ausgefüllt |
+| Auffindbar - "Profil und Beiträge in Suchalgorithmen berücksichtigen" (Discoverable) | 20 | Profil ist für Suche freigegeben |
+| Indexierbar - "Öffentliche Beiträge in die Suchergebnisse einbeziehen" | 20 | Profil ist für Indexierung freigegeben |
+| Verifizierte Links | 20 | Mindestens ein verifizierter Link |
 | Angepinnte Posts | 10 | Mindestens ein angepinnter Beitrag |
 | **Gesamt** | **100** | |
 
@@ -37,7 +37,7 @@ Ein Tool zur Überprüfung und Bewertung von Mastodon-Accounts basierend auf aus
 # Backend
 cd server
 npm install
-npm start
+npm run start-server
 
 # Frontend
 cd frontend
