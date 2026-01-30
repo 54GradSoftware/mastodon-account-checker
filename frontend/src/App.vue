@@ -10,7 +10,8 @@ import AppHeader from './components/AppHeader.vue'
 import AppFooter from './components/AppFooter.vue'
 import AccountResult from './components/AccountResult.vue'
 
-const mastodonHandle = ref('')
+const initialHandle = new URLSearchParams(window.location.search).get('username') || ''
+const mastodonHandle = ref(initialHandle)
 const loading = ref(false)
 const result = ref(null)
 const error = ref(null)
@@ -49,6 +50,9 @@ const checkScore = async () => {
     }
 }
 
+if(initialHandle) {
+    checkScore()
+}
 </script>
 
 <template>
@@ -131,6 +135,9 @@ const checkScore = async () => {
 </template>
 
 <style>
+.p-button{
+    color: #000000 !important;
+}
 .sr-only {
     position: absolute;
     width: 1px;

@@ -1,5 +1,5 @@
 <script setup>
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import Card from 'primevue/card'
 import ProgressBar from 'primevue/progressbar'
 import Message from 'primevue/message'
@@ -7,6 +7,9 @@ import Tag from 'primevue/tag'
 import Panel from 'primevue/panel'
 import Avatar from 'primevue/avatar'
 import Fieldset from 'primevue/fieldset'
+import Dialog from 'primevue/dialog'
+import Button from 'primevue/button'
+import InputText from 'primevue/inputtext'
 
 const props = defineProps({
     result: {
@@ -30,6 +33,20 @@ const scoreLabel = computed(() => {
     return 'Optimierung empfohlen'
 })
 
+const shareDialogVisible = ref(false)
+const copied = ref(false)
+
+const shareUrl = computed(() => {
+    const base = window.location.origin + window.location.pathname
+    return `${base}?username=${encodeURIComponent(props.result.handle)}`
+})
+
+const copyToClipboard = async () => {
+    await navigator.clipboard.writeText(shareUrl.value)
+    copied.value = true 
+    setTimeout(() => { copied.value = false }, 2000)
+}
+
 const mastodonServerUrl = computed(() => {
     if (!props.result?.handle) return ''
     const handle = props.result.handle.startsWith('@')
@@ -43,7 +60,7 @@ const mastodonServerUrl = computed(() => {
 </script>
 
 <template>
-    <section aria-label="Analyseergebnis" aria-live="polite">
+    <section>
         <!-- Score Übersicht -->
         <Card style="margin-bottom: 2rem;">
             <template #title>
@@ -65,8 +82,30 @@ const mastodonServerUrl = computed(() => {
                     <Tag :value="scoreLabel" :severity="scoreColor" style="font-size: 1rem;" />
                 </div>
                 <ProgressBar :value="result.score" :showValue="false" style="height: 1rem;" />
+
+                <div style="display: flex; justify-content: center; margin-top: 1.5rem;">
+                    <Button label="Ergebnis teilen" icon="pi pi-share-alt" severity="secondary" outlined
+                        @click="shareDialogVisible = true" />
+                </div>
             </template>
         </Card>
+
+        <!-- Teilen Dialog -->
+        <Dialog v-model:visible="shareDialogVisible" header="Ergebnis teilen" modal
+            style="width: 30rem; max-width: 95vw;">
+            <p style="margin: 0 0 1rem 0; line-height: 1.6;">
+                Teile das Ergebnis der Mastodon-Account Analyse von
+                <strong>{{ result.values.display_name || result.values.username }}</strong>
+                mit anderen. Kopiere dazu einfach den folgenden Link:
+            </p>
+            <div style="display: flex; gap: 0.5rem;">
+                <InputText :value="shareUrl" readonly style="flex: 1;" />
+                <Button :label="copied ? 'Kopiert!' : 'Kopieren'"
+                    :icon="copied ? 'pi pi-check' : 'pi pi-copy'"
+                    :severity="copied ? 'success' : 'primary'"
+                    @click="copyToClipboard" />
+            </div>
+        </Dialog>
 
         <!-- Detaillierte Bewertung -->
         <Fieldset legend="Detaillierte Bewertung" style="margin-bottom: 2rem;">
@@ -225,7 +264,7 @@ const mastodonServerUrl = computed(() => {
                         <strong>Angeheftete Beiträge:</strong>
                         <ul style="margin: 0.5rem 0 0 0; padding-left: 1.5rem;">
                             <li v-for="(url, index) in result.values.featuredCollection" :key="index">
-                                <a :href="url" target="_blank" rel="noopener" style="color: var(--p-primary-color);">
+                                <a :href="url" target="_blank" rel="noopener" >
                                     {{ url }}
                                 </a>
                             </li>
