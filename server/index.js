@@ -58,11 +58,8 @@ const getAccountLookup = async (mastodonHandle) => {
         })
         return data
     } catch (error) {
-        if (error.status !== 200) {
-            return null
-        } else {
-            console.error(error)
-        }
+        console.error(`Error looking up account ${mastodonHandle}:`, error.message)
+        return null
     }
 }
 
@@ -93,7 +90,7 @@ const getFeaturedCollection = async (mastodonHandle) => {
             timeout: 15000
         })
         // Nur die URLs extrahieren um Speicherplatz zu sparen
-        return (data || []).map(status => status.url)
+        return Array.isArray(data) ? data.map(status => status.url) : []
     } catch (error) {
         console.error('Error fetching featured collection:', error.message)
         return null
