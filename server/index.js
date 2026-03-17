@@ -53,7 +53,19 @@ const calculateMastodonAccountScore = async (mastodonHandle, accountLookup = nul
 
 const getAccountLookup = async (mastodonHandle) => {
     try {
-        const { data } = await axios.get(`https://mastodon.social/api/v1/accounts/lookup?acct=${mastodonHandle}`, {
+        const cleanHandle = mastodonHandle.startsWith('@')
+            ? mastodonHandle.slice(1)
+            : mastodonHandle
+
+        const atIndex = cleanHandle.indexOf('@')
+        if (atIndex === -1) {
+            console.error('Invalid mastodon handle format')
+            return null
+        }
+        const username = cleanHandle.slice(0, atIndex)
+        const mastodonServer = cleanHandle.slice(atIndex + 1)
+
+        const { data } = await axios.get(`https://${mastodonServer}/api/v1/accounts/lookup?acct=${username}`, {
             timeout: 15000
         })
         return data
